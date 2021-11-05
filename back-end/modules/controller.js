@@ -3,6 +3,7 @@ const service = require('./service');
 const create = async (req, res) => {
   try {
     const task = await service.create(req.body);
+    console.log('task', task);
     res.status(201).json(task);
     return;
   } catch (error) {
@@ -14,13 +15,7 @@ const create = async (req, res) => {
 const getAll = async (_req, res) => {
   try {
     const data = await service.getAll();
-    res.status(200).json([
-      {
-        task: 'lalalalalala alskdasdjasdl laskjd',
-        date: '25/12/1020',
-        sattus: 'pendente',
-      },
-    ]);
+    res.status(200).json(data);
     return;
   } catch (error) {
     console.log(error);

@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import Task from '../components/Task';
 
-function hendleClick() {}
+const test = {
+  task: 'Teste, teste, 1, 2, 3, teste',
+};
 
 function Home() {
   const [tasks, setTasks] = useState(null);
@@ -17,6 +19,15 @@ function Home() {
     }
   });
 
+  function createNewTask() {
+    fetch('http://localhost:3001/home')
+      // .then((data) => data.json())
+      // .then((tasks) => setTasks(tasks))
+      .catch((error) => {
+        console.log('Erro no fetch da Home', error);
+      });
+  }
+
   return (
     <div>
       <form>
@@ -26,7 +37,10 @@ function Home() {
             placeholder="Adicione a tarefa"
             name="task-input"
           ></input>
-          <button type="submit"> Enviar </button>                          
+          <button type="submit" onClick={createNewTask}>
+            {' '}
+            Enviar{' '}
+          </button>
         </label>
       </form>
       <div>
