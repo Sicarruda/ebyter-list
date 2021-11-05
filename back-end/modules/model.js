@@ -4,13 +4,20 @@ const create = (data) =>
   connection().then((db) =>
     db
       .collection('Tasks')
-      .insertOne({ task, date, status })
+      .insertOne({
+        task: data.task,
+        date: new Date('dd/mm/aaaa'),
+        status: data.status,
+      })
       .then((result) => ({
         _id: result.insertedId,
-        task,
-        date,
-        status,
+        task: data.task,
+        date: data.date,
+        status: data.status,
       }))
   );
 
-module.exports = { create };
+const getAll = () =>
+  connection().then((db) => db.collection('Tasks').find().toArray());
+
+module.exports = { create, getAll };
